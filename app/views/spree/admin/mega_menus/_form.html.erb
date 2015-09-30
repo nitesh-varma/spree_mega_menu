@@ -1,0 +1,21 @@
+<% if @mega_menu.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@mega_menu.errors.count, "error") %> prohibited this mega_menu from being saved:</h2>
+    <ul>
+    <% @mega_menu.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for [:admin, @mega_menu] do |f| %>
+  <%= f.label :name %>:
+  <%= f.text_field :name %>
+  <%= f.label :enabled %>:
+  <%= f.check_box :enabled %>
+    
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

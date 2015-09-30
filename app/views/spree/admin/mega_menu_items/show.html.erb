@@ -1,0 +1,43 @@
+
+<p id="notice"><%= notice %></p>
+<div class="cd-dropdown-wrapper">
+  <div id="ui-overlay"></div>
+    <nav class="cd-dropdown">
+      <h2 class="menutitle">Shop Categories</h2>
+    	<a href="#0" class="cd-close">Close</a>
+			<ul class="cd-dropdown-content">
+        <% mega_menu_build.each do |i| %>
+          <li class="has-children">
+          <%=  link_to i[:item].title, "/#{i[:item].link}"  %>
+            <% unless i[:children].empty? %>
+              <li class="has-children">
+                <ul class="cd-secondary-dropdown ">
+                  <% i[:children].each do |c| %>
+                    <li>
+                      <%=  link_to c[:item].title, "/#{c[:item].link}"  %>
+                       <% unless c[:children].empty? %>
+                        <li class="has-children">
+                          <ul class="cd-secondary-dropdown ">
+                            <% c[:children].each do |d| %>
+                              <li>
+                                <%=  link_to d[:item].title, "/#{d[:item].link}"  %>
+                              </li>
+                            <% end %>
+                          </ul>
+                        </li>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+            <% end %>
+          </li>
+        <% end %>
+			</ul>
+		</div>
+	</nav> <!-- .cd-dropdown -->
+</div> <!-- .cd-dropdown-wrapper -->
+
+
+<%= link_to 'Edit', edit_admin_mega_menu_path(@mega_menu) %> |
+<%= link_to 'Back', admin_mega_menus_path %>

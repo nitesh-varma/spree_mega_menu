@@ -1,0 +1,46 @@
+<div class="cd-dropdown-wrapper">
+  <div id="ui-overlay"></div>
+    <nav class="cd-dropdown">
+      
+      <!-- button opens menu -->
+      <h2 class="menutitle">Shop Categories</h2>
+    	<a href="#0" class="cd-close">Close</a>
+    	
+    	<!-- Main Category links -->
+			<ul class="cd-dropdown-content">
+  			
+        <% mega_menu_build(1).each do |i| %>
+        
+         <li class="has-children">
+						<%= link_to i[:item].title, i[:item].link %>
+
+						<ul class="cd-secondary-dropdown is-hidden">
+  						<h2 class="subcategory"><%= i[:item].title %></h2>
+							<li class="go-back"><a href="#0">Back to Main Menu</a></li>
+								<div class="mega-menu-col-dbl">
+  								
+                  <% i[:children].each do |c| %>
+    								<li><%= link_to c[:item].title, c[:item].link  %>
+    								 <% unless c[:children].empty? %>
+    								    <ul>
+      								    <% c[:children].each do |d| %>
+      								      <li><%= link_to d[:item].title, d[:item].link %></li>
+      								    <% end %>
+    								    </ul>
+    								 <% end %>
+    								</li>
+  								<% end %>
+  								
+								</div>
+							<li class="see-all"><%= link_to i[:item].title, i[:item].link %></li>
+						</ul> <!-- .cd-dropdown-icons -->
+						
+					</li> <!-- .has-children -->
+					
+        <% end %>
+        
+			</ul><!-- close  Main Category links  -->
+		</div>
+	</nav> <!-- .cd-dropdown -->
+</div> <!-- .cd-dropdown-wrapper -->
+

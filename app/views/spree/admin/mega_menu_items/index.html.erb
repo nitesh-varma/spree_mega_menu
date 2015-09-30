@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+
+<% content_for :page_title, Spree.t("mega_menu_items") %>
+
+<% content_for :page_actions do %>
+  
+<% end %>
+
+</h1>Listing items for menu: <%= @mega_menu.name %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="1">weight</th>
+      <th colspan="1">id</th>
+      <th colspan="1">parent_id</th>
+      <th colspan="1">title</th>
+      <th colspan="1">link</th>
+      <th colspan="1">type</th>
+      <th colspan="3">actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @mega_menu_items.each do |item| %>
+      <tr>
+        <td><%= item.weight %></td>
+        <td><%= item.id %></td>
+        <td><%= item.parent_id %></td>
+        <td><%= item.title %></td>
+        <td><%= item.link %></td>
+        <td><%= item.type_of_link %></td>
+        <td><%= link_to "Edit", edit_admin_mega_menu_mega_menu_item_path(@mega_menu, item) %>
+        <td><%= %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mega menu item', new_admin_mega_menu_mega_menu_item_path %>

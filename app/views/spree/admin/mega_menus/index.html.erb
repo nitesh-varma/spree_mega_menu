@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+
+<% content_for :page_title, Spree.t("mega_menus") %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t("new_mega_menu"),
+    new_admin_product_customization_type_url,
+    class: "btn-success", id: "new_mega_menu_link",
+    icon: "add" %>
+<% end %>
+
+<h1>Listing Mega Menu Items</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="1">Id</th>
+      <th colspan="1">Name</th>
+      <th colspan="1">Enabled?</th>
+ 
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @mega_menus.each do |mega_menu| %>
+      <tr>
+        <td><%= mega_menu.id %></td>
+        <td><%= mega_menu.name %></td>
+        <td><%= mega_menu.enabled %></td>
+        <td><%= link_to 'View Links', admin_mega_menu_mega_menu_items_path(mega_menu) %></td>
+        <td><%= link_to 'Edit',  edit_admin_mega_menu_path(mega_menu) %></td>
+        <td><%= button_to 'Delete', admin_mega_menu_path(mega_menu.id), :method => :delete %></td>
+             </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mega Menu', new_admin_mega_menu_path %>
