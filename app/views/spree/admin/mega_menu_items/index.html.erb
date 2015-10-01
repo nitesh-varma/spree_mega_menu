@@ -34,7 +34,7 @@
         <td><%= item.title %></td>
         <td><%= mega_menu_link item %></td>
         <td><%= item.type_of_link %></td>
-        <td><%= item.column %></td>
+        <td><%= column_name item.column %></td>
         <td><%= link_to "Edit", edit_admin_mega_menu_mega_menu_item_path(@mega_menu, item) %></td>
         <td><%= link_to_delete item, url: admin_mega_menu_mega_menu_item_path(@mega_menu, item), no_text: true %></td>
       </tr>

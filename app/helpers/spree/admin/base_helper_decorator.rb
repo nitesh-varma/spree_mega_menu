@@ -6,7 +6,7 @@ module Spree
         MegaMenu.find(id).build_menu
       end
   
-      def mega_menu_link mega_menu_item, options = {prefix: '', suffix:'', class:''}
+      def mega_menu_link mega_menu_item, options = {prefix: '', suffix:'', class:'', count:1}
         if mega_menu_item.type_of_link == "taxon"
           
           if self.is_number? mega_menu_item.link
@@ -22,12 +22,21 @@ module Spree
         end
         
         "<a class='cd-dropdown-item' href='#{url}'>
-          #{options[:prefix]} #{mega_menu_item.title} #{options[:suffix]}
+          #{options[:prefix]} #{mega_menu_item.title.pluralize(options[:count])} #{options[:suffix]}
         </a>".html_safe
       end
       
       def is_number? string
         true if Float(string) rescue false
+      end
+      
+      def column_name num 
+        case num
+        when 1 
+          "left"
+        when 2
+          "right"
+        end
       end
       
     end

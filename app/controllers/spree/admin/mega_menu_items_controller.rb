@@ -7,7 +7,7 @@ module Spree
     # GET /mega_menus
     # GET /mega_menus.json
     def index 
-      @mega_menu_items = @mega_menu.mega_menu_items
+      @mega_menu_items = @mega_menu.mega_menu_items.order("spree_mega_menu_items.weight ASC")
     end
   
     # GET /mega_menus/1

@@ -13,8 +13,7 @@ module Spree
     validates :type_of_link, inclusion: { in: %w(taxon page) , message: "%{value} is not a valid" }
     
     #scope :top_level, lambda { |col=1| where(parent_id: 0, column: col).order("weight DESC") }
-    scope :get_children, lambda { |id| where(parent_id: id).order("weight DESC") }
-    scope :get_col_2, lambda { where(column: 2, parent_id: self.id).order("weight DESC") }
+    scope :get_children, lambda { |id| where(parent_id: id).order("weight ASC") }
     
     # Add a child by passing id or MegaMenu Object
     def add_child item

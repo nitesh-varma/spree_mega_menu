@@ -40,7 +40,7 @@
 								
               </div>
               
-              <!-- column 2 -->
+              <!-- container for the right section "column 2" in db -->
               <div class="mega-menu-col-dbl">
                 
                 <% i[:children].each do |c| %>
@@ -68,7 +68,7 @@
                   <% end %>  
 						  </div>
 						  
-							<li class="see-all"><%=  mega_menu_link i[:item], prefix: "See All" %></li>
+							<li class="see-all"><%=  mega_menu_link i[:item], prefix: "See All", options: {count: 3} %></li>
 						</ul> <!-- .cd-dropdown-icons -->
 						
 					</li> <!-- .has-children -->
