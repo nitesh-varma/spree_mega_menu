@@ -4,7 +4,10 @@
 <% content_for :page_title, Spree.t("mega_menu_items") %>
 
 <% content_for :page_actions do %>
-  
+   <%= button_link_to Spree.t("new_admin_mega_menu_mega_menu_item"),
+    new_admin_mega_menu_mega_menu_item_path,
+    class: "btn-success", id: "new_admin_mega_menu_mega_menu_item_link",
+    icon: "add" %>
 <% end %>
 
 </h1>Listing items for menu: <%= @mega_menu.name %></h1>
@@ -18,6 +21,7 @@
       <th colspan="1">title</th>
       <th colspan="1">link</th>
       <th colspan="1">type</th>
+      <th colspan="1">layout column</th>
       <th colspan="3">actions</th>
     </tr>
   </thead>
@@ -28,10 +32,11 @@
         <td><%= item.id %></td>
         <td><%= item.parent_id %></td>
         <td><%= item.title %></td>
-        <td><%= item.link %></td>
+        <td><%= mega_menu_link item %></td>
         <td><%= item.type_of_link %></td>
-        <td><%= link_to "Edit", edit_admin_mega_menu_mega_menu_item_path(@mega_menu, item) %>
-        <td><%= %>
+        <td><%= item.column %></td>
+        <td><%= link_to "Edit", edit_admin_mega_menu_mega_menu_item_path(@mega_menu, item) %></td>
+        <td><%= link_to_delete item, url: admin_mega_menu_mega_menu_item_path(@mega_menu, item), no_text: true %></td>
       </tr>
     <% end %>
   </tbody>

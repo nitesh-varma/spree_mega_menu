@@ -17,11 +17,19 @@
       
       <%= f.label :link %>:
       <%= f.text_field :link %>
+      
+      <%= f.label :css_class %>:
+      <%= f.text_field  :css_class %>
     </div>
     
     <div class="form-group">
       <%= f.label :weight %>:
       <%= f.select :weight, options_for_select(-10..10, @mega_menu_item.weight) %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :column %>:
+      <%= f.select :column, options_for_select(1..2, @mega_menu_item.column) %>
     </div>
     
     <div class="form-group">

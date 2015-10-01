@@ -59,10 +59,6 @@ module Spree
     # DELETE /mega_menus/1.json
     def destroy
       @mega_menu.mega_menu_items.find(params[:id]).destroy
-      respond_to do |format|
-        format.html { redirect_to admin_mega_menu_mega_menu_items, notice: 'Mega menu item was successfully destroyed.' }
-        format.json { head :no_content }
-      end
     end
   
     private
@@ -85,7 +81,7 @@ module Spree
   
       # Never trust parameters from the scary internet, only allow the white list through.
       def mega_menu_item_params
-        params[:mega_menu_item].permit(:title, :link, :weight, :parent_id, :type_of_link, :top_level)
+        params[:mega_menu_item].permit(:title, :link, :weight, :parent_id, :type_of_link, :top_level, :css_class, :column)
       end
   end
 end

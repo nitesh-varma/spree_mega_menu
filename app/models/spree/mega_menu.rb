@@ -5,9 +5,9 @@ module Spree
     
     def build_menu
       self.mega_menu_items.where(top_level: true).map do |i| 
-        {item: i, children: i.children}
+        {item: i, children: i.children} 
       end
     end
-        
+
   end
 end

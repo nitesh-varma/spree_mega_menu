@@ -3,29 +3,27 @@ module Spree
     belongs_to :mega_menu
     
     attr_accessor :parent_name
-    before_save :get_taxon_path
+    before_save :check_top_level
     
     validates_presence_of :title
     validates_numericality_of :weight
     validates :type_of_link, inclusion: { in: %w(taxon page) , message: "%{value} is not a valid" }
     
-    scope :top_level, lambda { where(parent_id: 0) }
-    scope :get_children, lambda { |id| where(parent_id: id) }
-    scope :weight_order, lambda { order("spree_mega_menu_items.weight ASC") }
-    scope :desc_weight_order, lambda { order("spree_mega_menu_items.weight DESC") }
-    
+    #scope :top_level, lambda { |col=1| where(parent_id: 0, column: col).order("weight DESC") }
+    scope :get_children, lambda { |id| where(parent_id: id).order("weight DESC") }
+    scope :get_col_2, lambda { where(column: 2, parent_id: self.id).order("weight DESC") }
     
     # Add a child by passing id or MegaMenu Object
     def add_child item
       if item.is_a? Numeric 
-        m = Spree::MegaMenuItem.find(item)
+        item = Spree::MegaMenuItem.find(item)
       end
-      m.update_attributes(parent_id: self.id)
-    end
-    
-    def children
-      c = Spree::MegaMenuItem::get_children(self.id)
-      c.map { |i|  { item: i, children: i.children } }
+      item.update_attributes(parent_id: self.id)
+      
+      #update the child column unless the parent is top level
+      unless self.top_level
+        item.update_attributes(column: self.column)
+      end
     end
     
     def parent_name
@@ -34,25 +32,16 @@ module Spree
       p = Spree::MegaMenuItem::find self.parent_id
       p.title
     end
-    
         
     def check_top_level
-      if self.top_level.to_i == 1
+      if self.top_level == true
         self.parent_id = 0
       end
     end
-    
-    def get_taxon_path
-      if self.type_of_link == "taxon"
-        taxon = Taxon.find self.link
-        return if taxon.blank? 
-        self.link = taxon.permalink
-      end
-    end
 
-    def children
+    def children 
       c = Spree::MegaMenuItem::get_children(self.id)
-      c.map { |i|  { item: i, children: i.children } }
+      c.map { |i|  { item: i, children: i.children }  }
     end
     
     def parent_name
@@ -63,14 +52,6 @@ module Spree
     end
 
     private
-    
-    def get_taxon_path
-      if self.type_of_link == "taxon"
-        taxon = Taxon.find self.link
-        return if taxon.blank? 
-        self.link = taxon.permalink
-      end
-    end
-    
+        
   end
 end

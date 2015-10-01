@@ -8,31 +8,66 @@
     	
     	<!-- Main Category links -->
 			<ul class="cd-dropdown-content">
-  			
         <% mega_menu_build(1).each do |i| %>
         
          <li class="has-children">
-						<%= link_to i[:item].title, i[:item].link %>
-
+            <!-- top level links -->
+						<%=  mega_menu_link i[:item] %>
+            
 						<ul class="cd-secondary-dropdown is-hidden">
+  						<!-- top level titles in dropdown -->
   						<h2 class="subcategory"><%= i[:item].title %></h2>
 							<li class="go-back"><a href="#0">Back to Main Menu</a></li>
-								<div class="mega-menu-col-dbl">
-  								
-                  <% i[:children].each do |c| %>
-    								<li><%= link_to c[:item].title, c[:item].link  %>
-    								 <% unless c[:children].empty? %>
-    								    <ul>
-      								    <% c[:children].each do |d| %>
-      								      <li><%= link_to d[:item].title, d[:item].link %></li>
+							
+							<!-- container for the left section "column 1" in db -->
+							<div class="mega-menu-col-dbl">
+								
+                <% i[:children].each do |c| %>
+  								<% if (c[:item].column == 1) %>
+  								  <li><%= mega_menu_link c[:item] %></li>
+                  <% end %>
+  								<% unless c[:children].empty? %>
+								    <ul> 
+  								    <% c[:children].each do |d| %>
+  								      <% if (d[:item].column == 1) %>
+  								        <li><%= mega_menu_link d[:item] %></li>
+  								      <% end %>
+  								    <% end %>
+								    </ul>
+  								 <% end %>
+  								</li>
+								<% end %>
+								
+              </div>
+              
+              <!-- column 2 -->
+              <div class="mega-menu-col-dbl">
+                
+                <% i[:children].each do |c| %>
+  								 <% if (c[:item].column == 2) %>
+    								 <li class="mega-menu-highlight">
+    								  <%= mega_menu_link c[:item] , options: {class: "mega-menu-highlight"} %>
+    								 </li>
+  								 <% end %>
+  								 <% unless c[:children].empty? %>
+  								    <ul> 
+    								    <% c[:children].each do |d| %>
+    								      <% if (d[:item].column == 2) %>
+    								        <li class="mega-menu-highlight">
+    								          <%= mega_menu_link d[:item], options: {class: "mega-menu-highlight"} %>
+    								        </li>
       								    <% end %>
-    								    </ul>
-    								 <% end %>
-    								</li>
-  								<% end %>
-  								
-								</div>
-							<li class="see-all"><%= link_to i[:item].title, i[:item].link %></li>
+    								    <% end %>
+  								    </ul>
+  								 <% end %>
+  								</li>
+  							
+                  <% end %>
+  						 
+								<%= image_tag("wallpaper.jpg", :alt => "Mylar Contact Paper", :class => "mega-menu-feature") %>
+						  </div>
+						  
+							<li class="see-all"><%=  mega_menu_link i[:item], prefix: "See All" %></li>
 						</ul> <!-- .cd-dropdown-icons -->
 						
 					</li> <!-- .has-children -->
