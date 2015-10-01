@@ -63,8 +63,9 @@
   								</li>
   							
                   <% end %>
-  						 
-								<%= image_tag("wallpaper.jpg", :alt => "Mylar Contact Paper", :class => "mega-menu-feature") %>
+                  <% unless i[:item].menu_image.content_type.nil? %>
+                    <%= image_tag i[:item].menu_image.url, :alt => i[:title], :class => "mega-menu-feature" %>
+                  <% end %>  
 						  </div>
 						  
 							<li class="see-all"><%=  mega_menu_link i[:item], prefix: "See All" %></li>

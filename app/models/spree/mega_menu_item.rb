@@ -5,6 +5,9 @@ module Spree
     attr_accessor :parent_name
     before_save :check_top_level
     
+    has_attached_file :menu_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+    validates_attachment_content_type :menu_image, content_type: /\Aimage\/.*\Z/
+  
     validates_presence_of :title
     validates_numericality_of :weight
     validates :type_of_link, inclusion: { in: %w(taxon page) , message: "%{value} is not a valid" }

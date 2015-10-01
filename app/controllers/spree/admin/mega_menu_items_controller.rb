@@ -81,7 +81,7 @@ module Spree
   
       # Never trust parameters from the scary internet, only allow the white list through.
       def mega_menu_item_params
-        params[:mega_menu_item].permit(:title, :link, :weight, :parent_id, :type_of_link, :top_level, :css_class, :column)
+        params[:mega_menu_item].permit(:title, :link, :weight, :parent_id, :type_of_link, :top_level, :css_class, :column, :menu_image)
       end
   end
 end
