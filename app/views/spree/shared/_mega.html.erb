@@ -8,8 +8,8 @@
     	
     	<!-- Main Category links -->
 			<ul class="cd-dropdown-content">
-  		<% if mega_menu_build(1) = mega_menu  %>
-        <% mega_menu.each do |i| %>
+  		
+        <%  mega_menu_build(1).each do |i| %>
         
          <li class="has-children">
             <!-- top level links -->
@@ -75,7 +75,7 @@
 					</li> <!-- .has-children -->
 					
         <% end %>
-      <% end %>
+
 			</ul><!-- close  Main Category links  -->
 		</div>
 	</nav> <!-- .cd-dropdown -->
