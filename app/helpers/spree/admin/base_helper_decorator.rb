@@ -3,9 +3,9 @@ module Spree
     BaseHelper.module_eval do
       
       def mega_menu_build id
-        mega_menu = MegaMenu.find(id)
+        mega_menu = MegaMenu.where(id: id).first_or_create(name: "Shop", enabled: true)
         return mega_menu.build_menu unless mega_menu.nil?
-        return false
+       
       end
   
       def mega_menu_link mega_menu_item, options = {prefix: '', suffix:'', class:'', count:1}
