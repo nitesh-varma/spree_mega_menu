@@ -3,7 +3,9 @@ module Spree
     BaseHelper.module_eval do
       
       def mega_menu_build id
-        MegaMenu.find(id).build_menu
+        mega_menu = MegaMenu.find(id)
+        return mega_menu.build_menu unless mega_menu.nil?
+        return false
       end
   
       def mega_menu_link mega_menu_item, options = {prefix: '', suffix:'', class:'', count:1}
