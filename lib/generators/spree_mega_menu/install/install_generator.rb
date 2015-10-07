@@ -27,9 +27,6 @@ module SpreeMegaMenu
         end
       end
       
-      def add_default_menu
-        Spree::MegaMenu.where(name: "Shop", enabled: true).first_or_create;
-      end
     end
   end
 end
