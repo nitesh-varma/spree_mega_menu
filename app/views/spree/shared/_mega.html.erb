@@ -13,7 +13,7 @@
         
          <li class="has-children">
             <!-- top level links -->
-						<%=  mega_menu_link i[:item] %>
+						<%= get_mega_menu_link i[:item] %>
             
 						<ul class="cd-secondary-dropdown is-hidden">
   						<!-- top level titles in dropdown -->
@@ -25,13 +25,13 @@
 								
                 <% i[:children].each do |c| %>
   								<% if (c[:item].column == 1) %>
-  								  <li><%= mega_menu_link c[:item] %></li>
+  								  <li><%= get_mega_menu_link c[:item] %></li>
                   <% end %>
   								<% unless c[:children].empty? %>
 								    <ul> 
   								    <% c[:children].each do |d| %>
   								      <% if (d[:item].column == 1) %>
-  								        <li><%= mega_menu_link d[:item] %></li>
+  								        <li><%= get_mega_menu_link d[:item] %></li>
   								      <% end %>
   								    <% end %>
 								    </ul>
@@ -47,7 +47,7 @@
                 <% i[:children].each do |c| %>
   								 <% if (c[:item].column == 2) %>
     								 <li class="mega-menu-highlight">
-    								  <%= mega_menu_link c[:item] , options: {class: "mega-menu-highlight"} %>
+    								  <%= get_mega_menu_link c[:item] , options: {class: "mega-menu-highlight"} %>
     								 </li>
   								 <% end %>
   								 <% unless c[:children].empty? %>
@@ -55,7 +55,7 @@
     								    <% c[:children].each do |d| %>
     								      <% if (d[:item].column == 2) %>
     								        <li class="mega-menu-highlight">
-    								          <%= mega_menu_link d[:item], options: {class: "mega-menu-highlight"} %>
+    								          <%= get_mega_menu_link d[:item], options: {class: "mega-menu-highlight"} %>
     								        </li>
       								    <% end %>
     								    <% end %>
@@ -69,7 +69,7 @@
                   <% end %>  
 						  </div>
 						  
-							<li class="see-all"><%=  mega_menu_link i[:item], prefix: "See All", options: {count: 3} %></li>
+							<li class="see-all"><%=  get_mega_menu_link i[:item], prefix: "See All", options: {count: 3} %></li>
 						</ul> <!-- .cd-dropdown-icons -->
 						
 					</li> <!-- .has-children -->

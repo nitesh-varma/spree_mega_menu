@@ -32,7 +32,7 @@
         <td><%= item.id %></td>
         <td><%= item.parent_id %></td>
         <td><%= item.title %></td>
-        <td><%= mega_menu_link item %></td>
+        <td><%= get_mega_menu_link item %></td>
         <td><%= item.type_of_link %></td>
         <td><%= column_name item.column %></td>
         <td><%= link_to "Edit", edit_admin_mega_menu_mega_menu_item_path(@mega_menu, item) %></td>

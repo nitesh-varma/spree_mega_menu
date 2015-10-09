@@ -2,7 +2,6 @@ module Spree
   class MegaMenuItem < ActiveRecord::Base
     belongs_to :mega_menu
     
-    attr_accessor :parent_name
     before_save :check_top_level
     
     has_attached_file :menu_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
@@ -30,7 +29,6 @@ module Spree
     
     def parent_name
       return 'none' if self.parent_id == 0
-      
       p = Spree::MegaMenuItem::find self.parent_id
       p.title
     end
@@ -44,13 +42,6 @@ module Spree
     def children 
       c = Spree::MegaMenuItem::get_children(self.id)
       c.map { |i|  { item: i, children: i.children }  }
-    end
-    
-    def parent_name
-      return 'none' if self.parent_id == 0
-      
-      p = Spree::MegaMenuItem::find self.parent_id
-      p.title
     end
 
     private

@@ -1,23 +1,8 @@
 module Spree
   class Admin::MegaMenusController < Admin::ResourceController
     
-    before :set_mega_menu, only: [:edit, :links]
-    # GET /mega_menus
-    # GET /mega_menus.json
-    def index
-      @mega_menu = Spree::MegaMenu.all
-    end
-    
-    
-    # GET /mega_menus/new
-    def new
-      @mega_menu = Spree::MegaMenu.new
-    end
-  
-    # GET /mega_menus/1/edit
-    def edit
-    end
-  
+    before_action :set_mega_menu, only: [:edit, :links]
+      
     # POST /mega_menus
     # POST /mega_menus.json
     def create
