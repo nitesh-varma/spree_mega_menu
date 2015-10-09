@@ -13,13 +13,13 @@ module Spree
           link = mega_menu_item.link
           
           if self.is_number? link
-            url =  Spree::Taxon.where(id: mega_menu_item.link)
+            url =  Spree::Taxon.where(id: mega_menu_item.link).first
           elsif link.is_a? String
             url = Spree::Taxon.find_by_name(mega_menu_item.link)
           end 
             
-          if url.class == Spree::Taxon
-            url = self.seo_url(url)
+          if url.is_a? Spree::Taxon
+            url = seo_url(url)
           else
             url = link
           end
@@ -27,7 +27,7 @@ module Spree
         end
         
         "<a class='cd-dropdown-item' href='#{url}'>
-          #{options[:prefix]} #{mega_menu_item.title.pluralize(options[:count])} #{options[:suffix]}
+          #{options[:prefix]} #{mega_menu_item.title} #{options[:suffix]}
         </a>".html_safe
 
       end
