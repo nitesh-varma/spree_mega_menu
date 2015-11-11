@@ -17,11 +17,12 @@ module Spree
             
           elsif link.is_a? String
             url = Spree::Taxon.find_by_name(mega_menu_item.link)
-            if url.is_a? Spree::Taxon
-              url = seo_url(url)
-            end
+            
           end
           
+          if url.is_a? Spree::Taxon
+              url = seo_url(url)
+          end
         end
         
         # Build menu link
