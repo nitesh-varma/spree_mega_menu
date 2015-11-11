@@ -7,29 +7,27 @@ module Spree
       end
   
       def get_mega_menu_link mega_menu_item, options = {prefix: '', suffix:'', class:'', count:1}
-
+        
+        url = link = mega_menu_item.link
+        
         if mega_menu_item.type_of_link == "taxon"
-          
-          link = mega_menu_item.link
           
           if self.is_number? link
             url =  Spree::Taxon.where(id: mega_menu_item.link).first
+            
           elsif link.is_a? String
             url = Spree::Taxon.find_by_name(mega_menu_item.link)
-          end 
-            
-          if url.is_a? Spree::Taxon
-            url = seo_url(url)
-          else
-            url = link
+            if url.is_a? Spree::Taxon
+              url = seo_url(url)
+            end
           end
-
+          
         end
         
+        # Build menu link
         "<a class='cd-dropdown-item' href='#{url}'>
           #{options[:prefix]} #{mega_menu_item.title} #{options[:suffix]}
         </a>".html_safe
-
       end
       
       def is_number? string

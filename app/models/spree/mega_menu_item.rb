@@ -11,7 +11,6 @@ module Spree
     validates_numericality_of :weight
     validates :type_of_link, inclusion: { in: %w(taxon page) , message: "%{value} is not a valid" }
     
-    #scope :top_level, lambda { |col=1| where(parent_id: 0, column: col).order("weight DESC") }
     scope :get_children, lambda { |id| where(parent_id: id).order("weight ASC") }
     
     # Add a child by passing id or MegaMenu Object
