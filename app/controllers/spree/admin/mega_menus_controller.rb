@@ -10,7 +10,7 @@ module Spree
   
       respond_to do |format|
         if @mega_menu.save
-          format.html { redirect_to admin_mega_menu_url, notice: 'Mega menu item was successfully created.' }
+          format.html { redirect_to admin_mega_menus_url, notice: 'Mega menu item was successfully created.' }
           format.json { render :show, status: :created, location: @mega_menu }
         else
           format.html { render :new }
