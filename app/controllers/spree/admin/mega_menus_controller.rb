@@ -32,7 +32,7 @@ module Spree
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def mega_menu_params
-      params[:mega_menu_item].permit(:name, :enabled)
+      params.require(:mega_menu).permit(:name, :enabled)
     end
 
   end 
