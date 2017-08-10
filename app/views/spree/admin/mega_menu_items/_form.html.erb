@@ -8,56 +8,72 @@
     </ul>
   </div>
 <% end %>
-<div class='row'>
-  
+
   <%= form_for [:admin, @mega_menu, @mega_menu_item], html: {multipart: true} do |f| %>
-    <div class="form-group">
-      <%= f.label :title %>:
-      <%= f.text_field :title %>
-      
-      <%= f.label :link %>:
-      <%= f.text_field :link %>
-      
-      <%= f.label :css_class %>:
-      <%= f.text_field  :css_class %>
+    <div class='row'>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :title %>:
+        <%= f.text_field :title, :class => "form-control" %>
+      </div>
     </div>
-    
-    <div class="form-group">
-      <%= f.label :weight %>:
-      <%= f.select :weight, options_for_select(-10..10, @mega_menu_item.weight) %>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :link %>:
+        <%= f.text_field :link, :class => "form-control"  %>
+      </div>
     </div>
-    
-    <div class="form-group">
-      <%= f.label :column %>:
-      <%= f.select :column, options_for_select(1..2, @mega_menu_item.column) %>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :weight %>:
+        <%= select_tag 'mega_menu_item[weight]', options_for_select(-10..10, @mega_menu_item.weight), class: 'select2' %>
+      </div>
     </div>
-    
-    <div class="form-group">
-      <%= f.check_box :top_level %>
-      <%= f.label :top_level %>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :parent_id %>:
+        <span><%= f.collection_select :parent_id, @mega_menu.mega_menu_items, :id, :title, {}, { class: 'select2' } %></span>
+      </div>
     </div>
-    
-    <div class="form-group">
-      <%= f.label :type_of_link %>:
-      <%= f.radio_button :type_of_link, "taxon"%>
-      <%= f.label :type_of_link_taxon, "Taxon" %>
-      <%= f.radio_button :type_of_link, "page"%>
-      <%= f.label :type_of_link_page, "Page" %>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label :menu_image, Spree.t(:menu_item_image) %>
+        <%if @mega_menu_item.menu_image_file_name.present?%>
+            <p>
+              <a href="<%= @mega_menu_item.menu_image.url(:original) %>" target="_blank">
+                <%= image_tag @mega_menu_item.menu_image.url(:medium) %>
+              </a>
+            </p>
+        <%end%>
+        <%= file_field :mega_menu_item, :menu_image, :class => "form-control" %>
+      </div>
     </div>
-    
-    <div class="form-group">
-      <%= f.label :parent_id %>:
-      <%= f.collection_select :parent_id, @mega_menu.mega_menu_items, :id, :title %>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :type_of_link %>:
+        <%= f.radio_button :type_of_link, "taxon" %>
+        <%= f.label :type_of_link_taxon, "Taxon" %>
+        <%= f.radio_button :type_of_link, "page" %>
+        <%= f.label :type_of_link_page, "Page" %>
+      </div>
     </div>
-    
-    <div class="form-group">
-      <%= f.label :menu_image %>:
-      <%= f.file_field :menu_image %>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :top_level %>:
+        <%= f.check_box :top_level%>
+      </div>
     </div>
-    
-    <div class="actions">
-      <%= f.submit "Submit", class: "btn btn-default" %>
-    </div>
-  <% end %>
-  
-</div>
+  </div>
+
+    <%= f.submit "Сохранить", class: "btn btn-success" %>
+    <%= button_link_to Spree.t('actions.cancel'), admin_mega_menu_mega_menu_items_path, :icon => 'delete' %>
+
+<% end %>
+

@@ -9,13 +9,22 @@
   </div>
 <% end %>
 
-<%= form_for [:admin, @mega_menu] do |f| %>
-  <%= f.label :name %>:
-  <%= f.text_field :name %>
-  <%= f.label :enabled %>:
-  <%= f.check_box :enabled %>
-    
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <%= form_for [:admin, @mega_menu] do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name, Spree.t(:mega_menu_name) %> <span class="required">*</span>
+          <%= f.text_field :name, :class => "form-control" %>
+        </div>
+      </div>
+
+      <div class="col-md-1">
+        <div class="form-group">
+          <%= f.label :enabled, Spree.t(:mega_menu_enabled) %>
+          <%= f.check_box :enabled, :class => "form-control" %>
+        </div>
+      </div>
+    </div>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
 <% end %>
