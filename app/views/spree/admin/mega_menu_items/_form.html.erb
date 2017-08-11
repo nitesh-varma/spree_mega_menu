@@ -1,79 +1,85 @@
 <% if @mega_menu.errors.any? %>
-  <div class="row" id="error_explanation">
-    <h2><%= pluralize(@mega_menu.errors.count, "error") %> prohibited this mega_menu from being saved:</h2>
-    <ul>
-    <% @mega_menu.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
+    <div class="row" id="error_explanation">
+      <h2><%= pluralize(@mega_menu.errors.count, "error") %> prohibited this mega_menu from being saved:</h2>
+      <ul>
+        <% @mega_menu.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
 <% end %>
 
-  <%= form_for [:admin, @mega_menu, @mega_menu_item], html: {multipart: true} do |f| %>
+<%= form_for [:admin, @mega_menu, @mega_menu_item], html: {multipart: true} do |f| %>
     <div class='row'>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :title %>:
-        <%= f.text_field :title, :class => "form-control" %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :title, Spree.t(:menu_item_title) %>:
+          <%= f.text_field :title, :class => "form-control" %>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :link %>:
-        <%= f.text_field :link, :class => "form-control"  %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :link, Spree.t(:menu_item_link) %>:
+          <%= f.text_field :link, :class => "form-control"  %>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :weight %>:
-        <%= select_tag 'mega_menu_item[weight]', options_for_select(-10..10, @mega_menu_item.weight), class: 'select2' %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :weight, Spree.t(:menu_item_weight) %>:
+          <%= select_tag 'mega_menu_item[weight]', options_for_select(-10..10, @mega_menu_item.weight), class: 'select2' %>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :parent_id %>:
-        <span><%= f.collection_select :parent_id, @mega_menu.mega_menu_items, :id, :title, {}, { class: 'select2' } %></span>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :parent_id, Spree.t(:menu_item_parent) %>:
+          <span><%= f.collection_select :parent_id, @mega_menu.mega_menu_items, :id, :title, {}, { class: 'select2' } %></span>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= label :menu_image, Spree.t(:menu_item_image) %>
-        <%if @mega_menu_item.menu_image_file_name.present?%>
-            <p>
-              <a href="<%= @mega_menu_item.menu_image.url(:original) %>" target="_blank">
-                <%= image_tag @mega_menu_item.menu_image.url(:medium) %>
-              </a>
-            </p>
-        <%end%>
-        <%= file_field :mega_menu_item, :menu_image, :class => "form-control" %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= label :menu_image, Spree.t(:menu_item_image) %>
+          <%if @mega_menu_item.menu_image_file_name.present?%>
+              <p>
+                <a href="<%= @mega_menu_item.menu_image.url(:original) %>" target="_blank">
+                  <%= image_tag @mega_menu_item.menu_image.url(:medium) %>
+                </a>
+              </p>
+          <%end%>
+          <%= file_field :mega_menu_item, :menu_image, :class => "form-control" %>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :type_of_link %>:
-        <%= f.radio_button :type_of_link, "taxon" %>
-        <%= f.label :type_of_link_taxon, "Taxon" %>
-        <%= f.radio_button :type_of_link, "page" %>
-        <%= f.label :type_of_link_page, "Page" %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :type_of_link, Spree.t(:menu_item_type) %>:
+          <%= f.radio_button :type_of_link, "taxon" %>
+          <%= f.label :type_of_link_taxon, "Taxon" %>
+          <%= f.radio_button :type_of_link, "page" %>
+          <%= f.label :type_of_link_page, "Page" %>
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :top_level %>:
-        <%= f.check_box :top_level%>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :top_level, Spree.t(:menu_item_top) %>:
+          <%= f.check_box :top_level%>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :column, Spree.t(:menu_item_column) %>:
+          <%= f.select :column, options_for_select(1..2, @mega_menu_item.column) %>
+        </div>
       </div>
     </div>
-  </div>
 
     <%= f.submit "Сохранить", class: "btn btn-success" %>
     <%= button_link_to Spree.t('actions.cancel'), admin_mega_menu_mega_menu_items_path, :icon => 'delete' %>
 
 <% end %>
-

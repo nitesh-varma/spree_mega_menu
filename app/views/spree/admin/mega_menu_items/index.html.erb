@@ -3,38 +3,40 @@
 <% content_for :page_title, "#{Spree.t(:mega_menu_items)} #{@mega_menu.name}" %>
 
 <% content_for :page_actions do %>
-   <%= button_link_to Spree.t(:new_admin_mega_menu_mega_menu_item),
-    new_admin_mega_menu_mega_menu_item_path,
-    class: "btn-success", id: "new_admin_mega_menu_mega_menu_item_link",
-    icon: "add" %>
+    <%= button_link_to Spree.t(:new_admin_mega_menu_mega_menu_item),
+                       new_admin_mega_menu_mega_menu_item_path,
+                       class: "btn-success", id: "new_admin_mega_menu_mega_menu_item_link",
+                       icon: "add" %>
 <% end %>
 
 <table class="table">
   <thead>
-    <tr>
-      <th colspan="1"><%=Spree.t(:menu_item_weight)%></th>
-      <th colspan="1"><%=Spree.t(:menu_item_title)%></th>
-      <th colspan="1"><%=Spree.t(:menu_item_id)%></th>
-      <th colspan="1"><%=Spree.t(:menu_item_link)%></th>
-      <th colspan="1"><%=Spree.t(:menu_item_type)%></th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th colspan="1"><%=Spree.t(:menu_item_id)%></th>
+    <th colspan="1"><%=Spree.t(:menu_item_title)%></th>
+    <th colspan="1"><%=Spree.t(:menu_item_parent)%></th>
+    <th colspan="1"><%=Spree.t(:menu_item_link)%></th>
+    <th colspan="1"><%=Spree.t(:menu_item_type)%></th>
+    <th colspan="1"><%=Spree.t(:menu_item_weight)%></th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
   <tbody>
-    <% @mega_menu_items.each do |item| %>
+  <% @mega_menu_items.each do |item| %>
       <tr>
-        <td><%= item.weight %></td>
-        <td><%= item.title %></td>
         <td><%= item.id %></td>
+        <td><%= item.title %></td>
+        <td><%= item.parent_name if item.parent_name.present? %></td>
         <td><%= item.link %></td>
         <td><%= item.type_of_link %></td>
+        <td><%= item.weight %></td>
 
         <td class="actions text-right">
           <%= link_to_edit item, url: edit_admin_mega_menu_mega_menu_item_path(@mega_menu, item), no_text: true %>
           <%= link_to_delete item, url: admin_mega_menu_mega_menu_item_path(@mega_menu, item), no_text: true %>
         </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
