@@ -1,4 +1,4 @@
-class CreateTableMegaMenu < ActiveRecord::Migration
+class CreateTableMegaMenu < ActiveRecord::Migration[5.0]
   def change
     create_table :spree_mega_menus do |t|
       t.string :name

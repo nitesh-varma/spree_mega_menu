@@ -1,4 +1,4 @@
-class CreateTableMegaMenuItems < ActiveRecord::Migration
+class CreateTableMegaMenuItems < ActiveRecord::Migration[5.0]
   def up
     if ActiveRecord::Base.connection.table_exists? 'spree_mega_menu_items'
       drop_table :spree_mega_menu_items
