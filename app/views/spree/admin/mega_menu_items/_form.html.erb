@@ -36,7 +36,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <%= f.label :parent_id, Spree.t(:menu_item_parent) %>:
-          <span><%= f.collection_select :parent_id, @mega_menu.mega_menu_items, :id, :title, {}, { class: 'select2' } %></span>
+          <span><%= f.collection_select :parent_id, @mega_menu.mega_menu_items, :id, :title, {prompt: Spree.t(:menu_parent_no_choice)}, { class: 'select2' } %></span>
         </div>
       </div>
 
