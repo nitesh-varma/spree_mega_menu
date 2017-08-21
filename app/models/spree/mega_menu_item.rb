@@ -27,7 +27,7 @@ module Spree
     end
     
     def parent_name
-      return 'none' if self.parent_id == 0
+      return 'none' if self.parent_id == 0 || self.parent_id.nil?
       p = Spree::MegaMenuItem::find self.parent_id
       p.title
     end
