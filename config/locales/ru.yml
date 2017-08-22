@@ -1,5 +1,6 @@
 ru:
   spree:
+    mega_menus: "Управление меню"
     mega_menus_list: "Список меню"
     new_mega_menu: "Добавить меню"
     mega_menu_id: "ID"
